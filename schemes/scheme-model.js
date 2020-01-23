@@ -29,9 +29,21 @@ const add = scheme => {
       return findById(ids[0]);
     });
 };
+
+const update = (changes, id) => {
+  return db('schemes').update(changes).where({id}).then(_ => findById(id));
+}
+
+const remove = (id) => {
+  db('schemes').where({id}).del();
+  return findById(id)
+}
+
 module.exports = {
   find,
   findById,
   findSteps,
-  add
+  add,
+  update,
+  remove
 };
